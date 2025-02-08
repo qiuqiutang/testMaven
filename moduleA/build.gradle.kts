@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish") // 引入 Maven Publish 插件
 }
 
 android {
@@ -45,20 +44,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            create<MavenPublication>("maven") {
-                groupId = project.extra["publishGroupId"] as String
-                artifactId = "modulea"
-                version = project.extra["publishVersion"] as String
-
-                from(components["release"])
-            }
-        }
-    }
 }
