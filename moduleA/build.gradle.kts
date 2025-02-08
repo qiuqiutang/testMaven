@@ -54,7 +54,7 @@ afterEvaluate {
             // Creates a Maven publication called "release".
             create<MavenPublication>("maven") {
                 groupId = project.extra["publishGroupId"] as String
-                artifactId = "player"
+                artifactId = "modulea"
                 version = project.extra["publishVersion"] as String
 
                 from(components["release"])
