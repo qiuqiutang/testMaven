@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("maven-publish")
 }
 
 android {
-    namespace = "com.example.modulea"
+    namespace = "com.example.moduleA"
     compileSdk = 34
 
     defaultConfig {
@@ -30,11 +31,7 @@ android {
         jvmTarget = "11"
     }
 
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
+
 }
 
 dependencies {
@@ -44,4 +41,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.qiuqiutang"  // 替换为你的 GitHub 用户名
+                artifactId = "moduleA"              // 替换为你的模块名
+                version = "1.0.0"
+            }
+        }
+    }
 }
